@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: config-repo-claim
+  namespace: dev
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: nfs-client
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "eureka-service"
+  namespace: "dev"
+spec:
+  ports:
+    - port: 80
+      targetPort: 3030
+      protocol: TCP
+      nodePort: 30303
+  type: NodePort
+  selector:
+    app: "eureka-config-server"
+  clusterIP: 10.96.126.50 # 可指定可不指定
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: eureka-ingress
+  namespace: dev
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  tls:
+    - secretName: yj2025-secret
+      hosts:
+        - eureka-dev.yj2025.com
+  rules:
+    - host: eureka-dev.yj2025.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: eureka-service
+              servicePort: 80

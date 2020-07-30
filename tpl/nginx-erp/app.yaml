@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${APP_NAME}
+  namespace: ${PROFILE}
+spec:
+  selector:
+    matchLabels:
+      app: ${APP_NAME}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ${APP_NAME}
+    spec:
+      containers:
+        - name: ${APP_NAME}
+          image: ${REGISTRY_GROUP}/${APP_NAME}:${APP_VERSION}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: ${APP_PORT}
+          env:
+            - name: redepoly
+              value: "${TIME}"
+      imagePullSecrets:
+        - name: harbor-secret
