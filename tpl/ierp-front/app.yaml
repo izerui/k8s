@@ -63,5 +63,9 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: ${APP_NAME}-service
+              serviceName: nginx-erp-service
+              servicePort: 80
+          - path: /ierp
+            backend:
+              serviceName: ierp-front-service
               servicePort: 80
