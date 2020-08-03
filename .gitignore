@@ -5,3 +5,4 @@ temp/
 docker/
 server.key
 server.pem
+server.crt

@@ -68,6 +68,9 @@ metadata:
   name: eureka-ingress
   namespace: dev
   annotations:
+    ingress.kubernetes.io/auth-type: basic
+    ingress.kubernetes.io/auth-secret: basic-auth-secret
+    ingress.kubernetes.io/auth-realm: "Authentication Required"
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   tls:
