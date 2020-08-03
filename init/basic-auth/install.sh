@@ -1,2 +1,3 @@
-kubectl delete secret basic-auth-secret -n dev
-kubectl create secret generic basic-auth-secret --from-file=auth -n dev
+kubectl delete secret basic-auth -n dev
+kubectl create secret generic basic-auth --from-file=auth -n dev
+kubectl get secret basic-auth -o yaml -n dev

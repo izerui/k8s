@@ -1,31 +1,44 @@
-auth:yunji/yunji.1234
+$ htpasswd -c auth foo
+New password: <bar>
+New password:
+Re-type new password:
+Adding password for user foo
 
-kubectl create secret generic basic-auth-secret --from-file=auth -n dev
+
+$ kubectl create secret generic basic-auth --from-file=auth
+secret "basic-auth" created
 
 
-使用方式如下：
+$ kubectl get secret basic-auth -o yaml
+apiVersion: v1
+data:
+  auth: Zm9vOiRhcHIxJE9GRzNYeWJwJGNrTDBGSERBa29YWUlsSDkuY3lzVDAK
+kind: Secret
+metadata:
+  name: basic-auth
+  namespace: default
+type: Opaque
 
 
+echo "
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: eureka-ingress
-  namespace: dev
+  name: ingress-with-auth
   annotations:
+    # type of authentication
     nginx.ingress.kubernetes.io/auth-type: basic
-    nginx.ingress.kubernetes.io/auth-secret: basic-auth-secret
-    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    # name of the secret that contains the user/password definitions
+    nginx.ingress.kubernetes.io/auth-secret: basic-auth
+    # message to display with an appropriate context why the authentication is required
+    nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - foo'
 spec:
-  tls:
-    - secretName: yj2025-secret
-      hosts:
-        - eureka-dev.yj2025.com
   rules:
-    - host: eureka-dev.yj2025.com
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: eureka-service
-              servicePort: 80
+  - host: foo.bar.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: http-svc
+          servicePort: 80
+" | kubectl create -f -
