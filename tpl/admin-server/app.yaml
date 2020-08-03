@@ -51,7 +51,7 @@ metadata:
   name: ${APP_NAME}-ingress
   namespace: ${PROFILE}
   labels:
-    redepoly: ${TIME}
+    redepoly: "${TIME}"
   annotations:
 #    nginx.ingress.kubernetes.io/auth-type: basic
 #    nginx.ingress.kubernetes.io/auth-secret: basic-auth
