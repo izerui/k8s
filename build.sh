@@ -1,11 +1,11 @@
 #!/bin/bash
 # ------------------------     一。设置初始变量
-export APP_NAME=eureka-config-server
-export APP_VERSION=1.0.0
-export APP_PORT=3030
-export PROFILE=dev
-export BUILD_SH=jar.sh
-export REGISTRY_GROUP=harbor.yj2025.com
+#export APP_NAME=eureka-config-server
+#export APP_VERSION=1.0.0
+#export APP_PORT=3030
+#export PROFILE=dev
+#export BUILD_SH=jar.sh
+#export REGISTRY_GROUP=harbor.yj2025.com
 #sh ./build.sh
 # ------------------------     二。编译镜像
 echo ":::::: 开始打包"
