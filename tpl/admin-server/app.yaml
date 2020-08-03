@@ -56,6 +56,10 @@ metadata:
 #    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  tls:
+    - secretName: yj2025-secret
+      hosts:
+        - admin-dev.yj2025.com
   rules:
     - host: admin-dev.yj2025.com
       http:
