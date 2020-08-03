@@ -22,6 +22,9 @@ spec:
           volumeMounts:
             - mountPath: /www/ecworking-config-repo-tmp
               name: config-repo
+          env:
+            - name: redepoly
+              value: "${TIME}"
       nodeName: node202
       imagePullSecrets:
         - name: harbor-secret
