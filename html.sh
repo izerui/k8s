@@ -1,5 +1,7 @@
 #!/bin/bash
 HTML_FOLDER=docker/${PROFILE}/${APP_NAME}/target
+rm -rf ${HTML_FOLDER}
+mkdir ${HTML_FOLDER}
 tar zxvf docker/${PROFILE}/${APP_NAME}/app.tar.gz -C ${HTML_FOLDER}
 echo ":::::: 生成 Dockerfile"
 if [ ! -f "./tpl/${PROFILE}/${APP_NAME}/Dockerfile" ];then
