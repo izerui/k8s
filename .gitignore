@@ -2,7 +2,7 @@
 .idea/
 *.iml
 temp/
-docker/
 *.key
 *.pem
 *.crt
+*.jar

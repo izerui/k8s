@@ -7,6 +7,8 @@
 #export BUILD_SH=jar.sh
 #export REGISTRY_GROUP=harbor.yj2025.com
 #sh ./build.sh
+TIME=$(date "+%Y-%m-%d %H:%M:%S")
+git pull
 # ------------------------     二。编译镜像
 echo ":::::: 开始打包"
 echo ":::::: APP_NAME=${APP_NAME}"
@@ -19,7 +21,10 @@ echo " ------------------------- "
 
 # 执行编译
 ./${BUILD_SH}
-
+#git tag -a ${tagName} -m '上线发布'
+git add .
+git commit -m '${APP_NAME}-${TIME}'
+git push -u origin master
 # -------------------------    三。发布镜像
 #========================================================================
 echo ":::::: 发布镜像"
@@ -37,7 +42,6 @@ else
 YAML_TPL_FILE=./tpl/${APP_NAME}/app.yaml
 fi
 echo ":::::: 使用 ${YAML_TPL_FILE}"
-TIME=$(date "+%Y-%m-%d %H:%M:%S")
 eval "cat <<EOF
 $(< ${YAML_TPL_FILE})
 EOF
