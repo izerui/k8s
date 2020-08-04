@@ -63,7 +63,7 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: nginx-erp-service
+              serviceName: ierp-next-service
               servicePort: 80
           - path: /ierp
             backend:

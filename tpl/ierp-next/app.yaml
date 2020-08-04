@@ -24,3 +24,17 @@ spec:
               value: "${TIME}"
       imagePullSecrets:
         - name: harbor-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "${APP_NAME}-service"
+  namespace: "${PROFILE}"
+spec:
+  ports:
+    - port: 80
+      targetPort: ${APP_PORT}
+      protocol: TCP
+  type: ClusterIP
+  selector:
+    app: "${APP_NAME}"
