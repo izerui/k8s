@@ -7,7 +7,6 @@
 #export BUILD_SH=jar.sh
 #export REGISTRY_GROUP=harbor.yj2025.com
 #sh ./build.sh
-git pull
 # ------------------------     二。编译镜像
 echo ":::::: 开始打包"
 echo ":::::: APP_NAME=${APP_NAME}"
@@ -17,7 +16,7 @@ echo ":::::: PROFILE=${PROFILE}"
 echo ":::::: BUILD_SH=${BUILD_SH}"
 echo ":::::: REGISTRY_GROUP=${REGISTRY_GROUP}"
 echo " ------------------------- "
-
+git pull
 # 执行编译
 ./${BUILD_SH}
 #git tag -a ${tagName} -m '上线发布'
