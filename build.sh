@@ -16,9 +16,8 @@ echo ":::::: PROFILE=${PROFILE}"
 echo ":::::: BUILD_SH=${BUILD_SH}"
 echo ":::::: REGISTRY_GROUP=${REGISTRY_GROUP}"
 echo " ------------------------- "
-git pull
 # 执行编译
-./${BUILD_SH}
+git pull && ./${BUILD_SH}
 #git tag -a ${tagName} -m '上线发布'
 git commit -m "${APP_NAME}-${APP_VERSION}-${APP_PORT}-${PROFILE}-${BUILD_SH}"
 git push -u origin master
