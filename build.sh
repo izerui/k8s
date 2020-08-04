@@ -42,6 +42,7 @@ EOF
 " > docker/${PROFILE}/${APP_NAME}/app.yaml
 kubectl apply -f docker/${PROFILE}/${APP_NAME}/app.yaml
 echo ":::::: 重启完成"
-git add .
+git add docker/${PROFILE}/${APP_NAME}/Dockerfile
+git add docker/${PROFILE}/${APP_NAME}/app.yaml
 git commit -m "${APP_NAME}-${APP_VERSION}-${APP_PORT}-${PROFILE}-${BUILD_SH}"
 git push -u origin master
