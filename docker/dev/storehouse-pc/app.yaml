@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storehouse-pc
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: storehouse-pc
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: storehouse-pc
+    spec:
+      containers:
+        - name: storehouse-pc
+          image: harbor.yj2025.com/dev/storehouse-pc:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 21112
+          volumeMounts:
+            - mountPath: /data/java/logs/
+              name: cache-volume
+          env:
+            - name: redepoly
+              value: "2020-08-04 18:24:11"
+      imagePullSecrets:
+        - name: harbor-secret
+      volumes:
+        - name: cache-volume
+          emptyDir: {}
