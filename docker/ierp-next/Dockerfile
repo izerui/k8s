@@ -1,2 +1,2 @@
 FROM nginx:latest
-COPY ./ /usr/share/nginx/html
+COPY docker/ierp-next/target /usr/share/nginx/html
