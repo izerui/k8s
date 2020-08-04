@@ -1,6 +1,6 @@
 #!/bin/bash
-HTML_FOLDER=docker/${APP_NAME}/target
-tar zxvf docker/${APP_NAME}/app.tar.gz -C ${HTML_FOLDER}
+HTML_FOLDER=docker/${PROFILE}/${APP_NAME}/target
+tar zxvf docker/${PROFILE}/${APP_NAME}/app.tar.gz -C ${HTML_FOLDER}
 echo ":::::: 生成 Dockerfile"
 if [ ! -f "tpl/${APP_NAME}/Dockerfile" ];then
 DOCKER_TPL_FILE=tpl/default/Dockerfile
@@ -11,4 +11,4 @@ echo ":::::: 使用 ${DOCKER_TPL_FILE}"
 eval "cat <<EOF
 $(< ${DOCKER_TPL_FILE})
 EOF
-" > docker/${APP_NAME}/Dockerfile
+" > docker/${PROFILE}/${APP_NAME}/Dockerfile

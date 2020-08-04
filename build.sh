@@ -27,7 +27,7 @@ git push -u origin master
 #========================================================================
 echo ":::::: 发布镜像"
 REGISTRY_URL=${REGISTRY_GROUP}/${PROFILE}/${APP_NAME}:${APP_VERSION}
-docker build -f docker/${APP_NAME}/Dockerfile -t ${PROFILE}/${APP_NAME}:${APP_VERSION} .
+docker build -f docker/${PROFILE}/${APP_NAME}/Dockerfile -t ${PROFILE}/${APP_NAME}:${APP_VERSION} .
 docker tag ${PROFILE}/${APP_NAME}:${APP_VERSION} ${REGISTRY_URL}
 docker push ${REGISTRY_URL}
 echo ":::::: 打包完成: ${REGISTRY_URL}"
@@ -44,6 +44,6 @@ TIME=$(date "+%Y-%m-%d %H:%M:%S")
 eval "cat <<EOF
 $(< ${YAML_TPL_FILE})
 EOF
-" > docker/${APP_NAME}/app.yaml
-kubectl apply -f docker/${APP_NAME}/app.yaml
+" > docker/${PROFILE}/${APP_NAME}/app.yaml
+kubectl apply -f docker/${PROFILE}/${APP_NAME}/app.yaml
 echo ":::::: 重启完成"
