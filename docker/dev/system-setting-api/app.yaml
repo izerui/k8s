@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: system-setting-api
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: system-setting-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: system-setting-api
+    spec:
+      containers:
+        - name: system-setting-api
+          image: harbor.yj2025.com/dev/system-setting-api:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8111
+          volumeMounts:
+            - mountPath: /data/java/logs/
+              name: cache-volume
+          env:
+            - name: redepoly
+              value: "2020-08-04 17:32:57"
+      imagePullSecrets:
+        - name: harbor-secret
+      volumes:
+        - name: cache-volume
+          emptyDir: {}
