@@ -6,3 +6,4 @@ temp/
 *.pem
 *.crt
 *.jar
+*.tar.gz
