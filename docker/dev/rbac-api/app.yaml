@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rbac-api
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: rbac-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rbac-api
+    spec:
+      containers:
+        - name: rbac-api
+          image: harbor.yj2025.com/dev/rbac-api:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8082
+          volumeMounts:
+            - mountPath: /data/java/logs/
+              name: cache-volume
+          env:
+            - name: redepoly
+              value: "2020-08-04 11:41:33"
+      imagePullSecrets:
+        - name: harbor-secret
+      volumes:
+        - name: cache-volume
+          emptyDir: {}
