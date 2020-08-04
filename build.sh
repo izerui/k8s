@@ -7,7 +7,6 @@
 #export BUILD_SH=jar.sh
 #export REGISTRY_GROUP=harbor.yj2025.com
 #sh ./build.sh
-TIME=$(date "+%Y-%m-%d %H:%M:%S")
 git pull
 # ------------------------     二。编译镜像
 echo ":::::: 开始打包"
@@ -42,6 +41,7 @@ else
 YAML_TPL_FILE=./tpl/${APP_NAME}/app.yaml
 fi
 echo ":::::: 使用 ${YAML_TPL_FILE}"
+TIME=$(date "+%Y-%m-%d %H:%M:%S")
 eval "cat <<EOF
 $(< ${YAML_TPL_FILE})
 EOF
