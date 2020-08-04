@@ -15,13 +15,13 @@ spec:
     spec:
       containers:
         - name: ierp-next
-          image: harbor.yj2025.com/ierp-next:1.0.1
+          image: harbor.yj2025.com/dev/ierp-next:1.0.1
           imagePullPolicy: Always
           ports:
             - containerPort: 80
           env:
             - name: redepoly
-              value: "2020-08-04 12:36:44"
+              value: "2020-08-04 12:51:52"
       imagePullSecrets:
         - name: harbor-secret
 ---
