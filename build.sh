@@ -34,10 +34,10 @@ echo ":::::: 打包完成: ${REGISTRY_URL}"
 
 # -------------------------    四。重启服务
 echo ":::::: 重启应用"
-if [ ! -f "./tpl/${APP_NAME}/app.yaml" ];then
+if [ ! -f "./tpl/${PROFILE}/${APP_NAME}/app.yaml" ];then
 YAML_TPL_FILE=./tpl/default/app.yaml
 else
-YAML_TPL_FILE=./tpl/${APP_NAME}/app.yaml
+YAML_TPL_FILE=./tpl/${PROFILE}/${APP_NAME}/app.yaml
 fi
 echo ":::::: 使用 ${YAML_TPL_FILE}"
 TIME=$(date "+%Y-%m-%d %H:%M:%S")
