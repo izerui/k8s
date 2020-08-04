@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ierp-next
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: ierp-next
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ierp-next
+    spec:
+      containers:
+        - name: ierp-next
+          image: harbor.yj2025.com/ierp-next:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: redepoly
+              value: "2020-08-04 11:52:28"
+      imagePullSecrets:
+        - name: harbor-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "ierp-next-service"
+  namespace: "dev"
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  type: ClusterIP
+  selector:
+    app: "ierp-next"
