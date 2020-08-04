@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dictionary-api
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: dictionary-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dictionary-api
+    spec:
+      containers:
+        - name: dictionary-api
+          image: harbor.yj2025.com/dev/dictionary-api:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - mountPath: /data/java/logs/
+              name: cache-volume
+          env:
+            - name: redepoly
+              value: "2020-08-04 17:55:17"
+      imagePullSecrets:
+        - name: harbor-secret
+      volumes:
+        - name: cache-volume
+          emptyDir: {}
