@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: ${APP_NAME}
-          image: ${REGISTRY_GROUP}/${APP_NAME}:${APP_VERSION}
+          image: ${REGISTRY_GROUP}/${PROFILE}/${APP_NAME}:${APP_VERSION}
           imagePullPolicy: Always
           ports:
             - containerPort: ${APP_PORT}
