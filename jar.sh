@@ -10,4 +10,4 @@ echo ":::::: 使用 ${DOCKER_TPL_FILE}"
 eval "cat <<EOF
 $(< ${DOCKER_TPL_FILE})
 EOF
-" > docker/${PROFILE}/${APP_NAME}/Dockerfile && git add .
+" > docker/${PROFILE}/${APP_NAME}/Dockerfile

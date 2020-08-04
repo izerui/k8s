@@ -18,9 +18,6 @@ echo ":::::: REGISTRY_GROUP=${REGISTRY_GROUP}"
 echo " ------------------------- "
 # 执行编译
 git pull && ./${BUILD_SH}
-#git tag -a ${tagName} -m '上线发布'
-git commit -m "${APP_NAME}-${APP_VERSION}-${APP_PORT}-${PROFILE}-${BUILD_SH}"
-git push -u origin master
 # -------------------------    三。发布镜像
 #========================================================================
 echo ":::::: 发布镜像"
@@ -45,3 +42,6 @@ EOF
 " > docker/${PROFILE}/${APP_NAME}/app.yaml
 kubectl apply -f docker/${PROFILE}/${APP_NAME}/app.yaml
 echo ":::::: 重启完成"
+git add .
+git commit -m "${APP_NAME}-${APP_VERSION}-${APP_PORT}-${PROFILE}-${BUILD_SH}"
+git push -u origin master
