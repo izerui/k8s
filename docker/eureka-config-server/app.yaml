@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka-config-server
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: eureka-config-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: eureka-config-server
+    spec:
+      containers:
+        - name: eureka-config-server
+          image: harbor.yj2025.com/dev/eureka-config-server:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3030
+          volumeMounts:
+            - mountPath: /www/ecworking-config-repo-tmp
+              name: config-repo
+          env:
+            - name: redepoly
+              value: "2020-08-04 10:10:38"
+      nodeName: node202
+      imagePullSecrets:
+        - name: harbor-secret
+      volumes:
+        - name: config-repo
+          persistentVolumeClaim:
+            claimName: config-repo-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: config-repo-claim
+  namespace: dev
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: nfs-client
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "eureka-service"
+  namespace: "dev"
+spec:
+  ports:
+    - port: 80
+      targetPort: 3030
+      protocol: TCP
+      nodePort: 30303
+  type: NodePort
+  selector:
+    app: "eureka-config-server"
+#  clusterIP: 10.96.126.50 # 可指定也可不指定
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: eureka-ingress
+  namespace: dev
+  annotations:
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: basic-auth
+    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  tls:
+    - secretName: yj2025-secret
+      hosts:
+        - eureka-dev.yj2025.com
+  rules:
+    - host: eureka-dev.yj2025.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: eureka-service
+              servicePort: 80
