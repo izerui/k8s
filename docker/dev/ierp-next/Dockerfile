@@ -1,3 +1,2 @@
-FROM openjdk:8-jdk-alpine
-COPY  app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+FROM nginx:latest
+COPY docker/dev/ierp-next/target /usr/share/nginx/html
