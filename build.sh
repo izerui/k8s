@@ -22,7 +22,7 @@ echo " ------------------------- "
 ./${BUILD_SH}
 #git tag -a ${tagName} -m '上线发布'
 git add .
-git commit -m "${APP_NAME}-${APP_VERSION}-${APP_PORT}-${PROFILE}-${BUILD_SH}-${TIME}"
+git commit -m "${APP_NAME}-${APP_VERSION}-${APP_PORT}-${PROFILE}-${BUILD_SH}"
 git push -u origin master
 # -------------------------    三。发布镜像
 #========================================================================
