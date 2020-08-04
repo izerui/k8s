@@ -24,7 +24,7 @@ spec:
               name: config-repo
           env:
             - name: redepoly
-              value: "2020-08-04 16:35:22"
+              value: "2020-08-04 16:44:11"
       nodeName: node202
       imagePullSecrets:
         - name: harbor-secret
