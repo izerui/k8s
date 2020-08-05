@@ -38,8 +38,12 @@ metadata:
   namespace: ${PROFILE}
 spec:
   ports:
-    - port: 8066
+    - name: websocket
+      port: 8066
       targetPort: ${APP_PORT}
+      protocol: TCP
+    - name: web
+      port: 20001
       protocol: TCP
   type: ClusterIP
   selector:
