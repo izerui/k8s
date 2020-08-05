@@ -28,6 +28,7 @@ docker push ${REGISTRY_URL}
 echo ":::::: 打包完成: ${REGISTRY_URL}"
 
 echo ":::::: 清理镜像"
+
 docker rmi ${PROFILE}/${APP_NAME}:${APP_VERSION}
 # -------------------------    四。重启服务
 echo ":::::: 重启应用"
