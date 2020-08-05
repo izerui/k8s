@@ -18,13 +18,18 @@ spec:
           image: harbor.yj2025.com/dev/websocket-server:1.0.0
           imagePullPolicy: Always
           ports:
-            - containerPort: 8066
+            - name: websocket
+              containerPort: 8066
+              protocol: TCP
+            - name: web
+              containerPort: 20001
+              protocol: TCP
           volumeMounts:
             - mountPath: /data/java/logs/
               name: cache-volume
           env:
             - name: redepoly
-              value: "2020-08-05 19:25:30"
+              value: "2020-08-05 19:33:54"
       imagePullSecrets:
         - name: harbor-secret
       volumes:
@@ -41,9 +46,6 @@ spec:
     - name: websocket
       port: 8066
       targetPort: 8066
-      protocol: TCP
-    - name: web
-      port: 20001
       protocol: TCP
   type: ClusterIP
   selector:
