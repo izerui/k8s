@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proofing-pc
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: proofing-pc
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: proofing-pc
+    spec:
+      containers:
+        - name: proofing-pc
+          image: harbor.yj2025.com/dev/proofing-pc:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 12222
+          volumeMounts:
+            - mountPath: /data/java/logs/
+              name: cache-volume
+          env:
+            - name: redepoly
+              value: "2020-08-05 11:49:26"
+      imagePullSecrets:
+        - name: harbor-secret
+      volumes:
+        - name: cache-volume
+          emptyDir: {}
