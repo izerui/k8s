@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dictionary-pc
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: dictionary-pc
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dictionary-pc
+    spec:
+      containers:
+        - name: dictionary-pc
+          image: harbor.yj2025.com/dev/dictionary-pc:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9033
+          volumeMounts:
+            - mountPath: /data/java/logs/
+              name: cache-volume
+          env:
+            - name: redepoly
+              value: "2020-08-05 11:41:07"
+      imagePullSecrets:
+        - name: harbor-secret
+      volumes:
+        - name: cache-volume
+          emptyDir: {}
