@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: development-api
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: development-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: development-api
+    spec:
+      containers:
+        - name: development-api
+          image: harbor.yj2025.com/dev/development-api:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 31001
+          volumeMounts:
+            - mountPath: /data/java/logs/
+              name: cache-volume
+          env:
+            - name: redepoly
+              value: "2020-08-05 11:37:11"
+      imagePullSecrets:
+        - name: harbor-secret
+      volumes:
+        - name: cache-volume
+          emptyDir: {}
