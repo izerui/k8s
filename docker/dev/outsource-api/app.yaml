@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: outsource-api
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: outsource-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: outsource-api
+    spec:
+      containers:
+        - name: outsource-api
+          image: harbor.yj2025.com/dev/outsource-api:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 11111
+          volumeMounts:
+            - mountPath: /data/java/logs/
+              name: cache-volume
+          env:
+            - name: redepoly
+              value: "2020-08-05 14:58:04"
+      imagePullSecrets:
+        - name: harbor-secret
+      volumes:
+        - name: cache-volume
+          emptyDir: {}
