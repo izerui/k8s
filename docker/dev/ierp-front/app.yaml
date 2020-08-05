@@ -24,7 +24,7 @@ spec:
               name: cache-volume
           env:
             - name: redepoly
-              value: "2020-08-04 11:25:29"
+              value: "2020-08-05 18:23:25"
       imagePullSecrets:
         - name: harbor-secret
       volumes:
@@ -52,6 +52,7 @@ metadata:
   namespace: dev
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.org/websocket-services: "websocket-server-service"
 spec:
   tls:
     - secretName: yj2025-secret
@@ -69,3 +70,7 @@ spec:
             backend:
               serviceName: ierp-front-service
               servicePort: 80
+          - path: /websocket
+            backend:
+              serviceName: websocket-server-service
+              servicePort: 8066
