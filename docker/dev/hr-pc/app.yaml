@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hr-pc
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: hr-pc
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hr-pc
+    spec:
+      containers:
+        - name: hr-pc
+          image: harbor.yj2025.com/dev/hr-pc:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 32002
+          volumeMounts:
+            - mountPath: /data/java/logs/
+              name: cache-volume
+          env:
+            - name: redepoly
+              value: "2020-08-05 11:34:19"
+      imagePullSecrets:
+        - name: harbor-secret
+      volumes:
+        - name: cache-volume
+          emptyDir: {}
