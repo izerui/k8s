@@ -18,7 +18,12 @@ spec:
           image: ${REGISTRY_GROUP}/${PROFILE}/${APP_NAME}:${APP_VERSION}
           imagePullPolicy: Always
           ports:
-            - containerPort: ${APP_PORT}
+            - name: websocket
+              containerPort: ${APP_PORT}
+              protocol: TCP
+            - name: web
+              containerPort: 20001
+              protocol: TCP
           volumeMounts:
             - mountPath: /data/java/logs/
               name: cache-volume
@@ -41,9 +46,6 @@ spec:
     - name: websocket
       port: 8066
       targetPort: ${APP_PORT}
-      protocol: TCP
-    - name: web
-      port: 20001
       protocol: TCP
   type: ClusterIP
   selector:
