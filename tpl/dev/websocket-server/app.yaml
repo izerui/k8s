@@ -19,10 +19,10 @@ spec:
           imagePullPolicy: Always
           ports:
             - name: websocket
-              containerPort: ${APP_PORT}
+              containerPort: 8066
               protocol: TCP
             - name: web
-              containerPort: 20001
+              containerPort: ${APP_PORT}
               protocol: TCP
           volumeMounts:
             - mountPath: /data/java/logs/
@@ -45,7 +45,7 @@ spec:
   ports:
     - name: websocket
       port: 8066
-      targetPort: ${APP_PORT}
+      targetPort: 8066
       protocol: TCP
   type: ClusterIP
   selector:
