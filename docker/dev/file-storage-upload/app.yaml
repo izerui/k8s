@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rbac-api
+  name: file-storage-upload
   namespace: dev
 spec:
   selector:
     matchLabels:
-      app: rbac-api
+      app: file-storage-upload
   replicas: 1
   template:
     metadata:
       labels:
-        app: rbac-api
+        app: file-storage-upload
     spec:
       containers:
-        - name: rbac-api
-          image: harbor.yj2025.com/dev/rbac-api:1.0.0
+        - name: file-storage-upload
+          image: harbor.yj2025.com/dev/file-storage-upload:1.0.0
           imagePullPolicy: Always
           ports:
-            - containerPort: 8082
+            - containerPort: 8687
           volumeMounts:
             - mountPath: /data/java/logs/
               name: cache-volume
           env:
             - name: redepoly
-              value: "2020-08-04 17:18:36"
+              value: "2020-08-05 14:16:59"
       imagePullSecrets:
         - name: harbor-secret
       volumes:

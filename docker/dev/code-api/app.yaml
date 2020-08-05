@@ -18,13 +18,13 @@ spec:
           image: harbor.yj2025.com/dev/code-api:1.0.0
           imagePullPolicy: Always
           ports:
-            - containerPort: 8172
+            - containerPort: 8311
           volumeMounts:
             - mountPath: /data/java/logs/
               name: cache-volume
           env:
             - name: redepoly
-              value: "2020-08-04 11:39:37"
+              value: "2020-08-05 13:53:25"
       imagePullSecrets:
         - name: harbor-secret
       volumes:
