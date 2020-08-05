@@ -24,7 +24,7 @@ spec:
               name: cache-volume
           env:
             - name: redepoly
-              value: "2020-08-05 18:22:32"
+              value: "2020-08-05 19:25:30"
       imagePullSecrets:
         - name: harbor-secret
       volumes:
@@ -38,8 +38,12 @@ metadata:
   namespace: dev
 spec:
   ports:
-    - port: 8066
+    - name: websocket
+      port: 8066
       targetPort: 8066
+      protocol: TCP
+    - name: web
+      port: 20001
       protocol: TCP
   type: ClusterIP
   selector:
