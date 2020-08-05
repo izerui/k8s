@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: purchase-pc
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: purchase-pc
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: purchase-pc
+    spec:
+      containers:
+        - name: purchase-pc
+          image: harbor.yj2025.com/dev/purchase-pc:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 40002
+          volumeMounts:
+            - mountPath: /data/java/logs/
+              name: cache-volume
+          env:
+            - name: redepoly
+              value: "2020-08-05 15:16:41"
+      imagePullSecrets:
+        - name: harbor-secret
+      volumes:
+        - name: cache-volume
+          emptyDir: {}
