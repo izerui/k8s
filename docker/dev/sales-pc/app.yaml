@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sales-pc
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app: sales-pc
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sales-pc
+    spec:
+      containers:
+        - name: sales-pc
+          image: harbor.yj2025.com/dev/sales-pc:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 50002
+          volumeMounts:
+            - mountPath: /data/java/logs/
+              name: cache-volume
+          env:
+            - name: redepoly
+              value: "2020-08-05 14:03:41"
+      imagePullSecrets:
+        - name: harbor-secret
+      volumes:
+        - name: cache-volume
+          emptyDir: {}
