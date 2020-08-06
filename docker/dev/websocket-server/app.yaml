@@ -20,16 +20,18 @@ spec:
           ports:
             - name: websocket
               containerPort: 8066
+              hostPort: 8066
               protocol: TCP
             - name: web
               containerPort: 20001
+              hostPort: 20001
               protocol: TCP
           volumeMounts:
             - mountPath: /data/java/logs/
               name: cache-volume
           env:
             - name: redepoly
-              value: "2020-08-05 19:33:54"
+              value: "2020-08-06 10:08:39"
       imagePullSecrets:
         - name: harbor-secret
       volumes:
