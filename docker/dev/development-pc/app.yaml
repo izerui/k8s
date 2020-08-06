@@ -19,12 +19,14 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 31002
+              # 暴露相应的端口到node上
+              hostPort: 31002
           volumeMounts:
             - mountPath: /data/java/logs/
               name: cache-volume
           env:
             - name: redepoly
-              value: "2020-08-05 11:38:17"
+              value: "2020-08-06 10:21:51"
       imagePullSecrets:
         - name: harbor-secret
       volumes:
