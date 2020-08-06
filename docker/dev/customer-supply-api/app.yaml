@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: outsource-pc
+  name: customer-supply-api
   namespace: dev
 spec:
   selector:
     matchLabels:
-      app: outsource-pc
+      app: customer-supply-api
   replicas: 1
   template:
     metadata:
       labels:
-        app: outsource-pc
+        app: customer-supply-api
     spec:
       containers:
-        - name: outsource-pc
-          image: harbor.yj2025.com/dev/outsource-pc:1.0.0
+        - name: customer-supply-api
+          image: harbor.yj2025.com/dev/customer-supply-api:1.0.0
           imagePullPolicy: Always
           ports:
-            - containerPort: 11112
+            - containerPort: 11122
           volumeMounts:
             - mountPath: /data/java/logs/
               name: cache-volume
           env:
             - name: redepoly
-              value: "2020-08-06 09:35:26"
+              value: "2020-08-06 09:47:16"
       imagePullSecrets:
         - name: harbor-secret
       volumes:
