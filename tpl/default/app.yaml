@@ -19,6 +19,8 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: ${APP_PORT}
+              # 暴露相应的端口到node上
+              hostPort: ${APP_PORT}
           volumeMounts:
             - mountPath: /data/java/logs/
               name: cache-volume
