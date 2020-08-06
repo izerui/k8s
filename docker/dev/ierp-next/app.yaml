@@ -21,7 +21,7 @@ spec:
             - containerPort: 80
           env:
             - name: redepoly
-              value: "2020-08-05 18:51:22"
+              value: "2020-08-06 12:12:31"
       imagePullSecrets:
         - name: harbor-secret
 ---
