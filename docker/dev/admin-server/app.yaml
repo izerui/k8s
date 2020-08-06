@@ -25,7 +25,7 @@ spec:
               name: cache-volume
           env:
             - name: redepoly
-              value: "2020-08-06 10:08:33"
+              value: "2020-08-06 12:18:04"
       imagePullSecrets:
         - name: harbor-secret
       volumes:

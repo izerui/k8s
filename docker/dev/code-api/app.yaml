@@ -18,15 +18,15 @@ spec:
           image: harbor.yj2025.com/dev/code-api:1.0.0
           imagePullPolicy: Always
           ports:
-            - containerPort: 8311
+            - containerPort: 8172
               # 暴露相应的端口到node上
-              hostPort: 8311
+              hostPort: 8172
           volumeMounts:
             - mountPath: /data/java/logs/
               name: cache-volume
           env:
             - name: redepoly
-              value: "2020-08-06 10:19:24"
+              value: "2020-08-06 12:17:36"
       imagePullSecrets:
         - name: harbor-secret
       volumes:
