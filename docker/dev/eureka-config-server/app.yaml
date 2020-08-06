@@ -19,12 +19,13 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 3030
+              hostPort: 3030
           volumeMounts:
             - mountPath: /www/ecworking-config-repo-tmp
               name: config-repo
           env:
             - name: redepoly
-              value: "2020-08-04 16:44:11"
+              value: "2020-08-06 10:08:33"
       nodeName: node202
       imagePullSecrets:
         - name: harbor-secret
