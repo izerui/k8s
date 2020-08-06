@@ -19,7 +19,6 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: ${APP_PORT}
-              hostPort: ${APP_PORT}
           volumeMounts:
             - mountPath: /www/ecworking-config-repo-tmp
               name: config-repo

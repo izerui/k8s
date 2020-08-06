@@ -20,11 +20,9 @@ spec:
           ports:
             - name: websocket
               containerPort: 8066
-              hostPort: 8066
               protocol: TCP
             - name: web
               containerPort: ${APP_PORT}
-              hostPort: ${APP_PORT}
               protocol: TCP
           volumeMounts:
             - mountPath: /data/java/logs/
