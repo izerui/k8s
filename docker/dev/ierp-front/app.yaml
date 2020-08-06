@@ -19,12 +19,13 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8865
+              hostPort: 8865
           volumeMounts:
             - mountPath: /data/java/logs/
               name: cache-volume
           env:
             - name: redepoly
-              value: "2020-08-05 18:23:25"
+              value: "2020-08-06 12:11:52"
       imagePullSecrets:
         - name: harbor-secret
       volumes:
