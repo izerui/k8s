@@ -17,7 +17,8 @@ echo ":::::: BUILD_SH=${BUILD_SH}"
 echo ":::::: REGISTRY_GROUP=${REGISTRY_GROUP}"
 echo " ------------------------- "
 # 执行编译
-git pull && sh ${BUILD_SH}
+#git pull && sh ${BUILD_SH}
+sh ${BUILD_SH}
 # -------------------------    三。发布镜像
 #========================================================================
 echo ":::::: 发布镜像"
