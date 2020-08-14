@@ -26,6 +26,7 @@ spec:
       labels:
         app: redis
     spec:
+      hostNetwork: true
       containers:
         - name: redis
           image: redis:5.0.4
